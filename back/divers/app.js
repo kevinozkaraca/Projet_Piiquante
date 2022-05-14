@@ -8,14 +8,22 @@ const userRoutes = require("../routes/routesUser");
 const sauceRoutes = require("../routes/routesSauce");
 
 // mongoose : facilite l'acces a MongoBD
+// ---------- connect :
+// process.env.DB_ACCESS (contient le lien)
+// process.env.MONGO_PSWD (contient le mot de passe)
+// mongodb://localhost/27017
 mongoose
-  .connect("mongodb://localhost/27017", { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(`mongodb://localhost/27017`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 const app = express();
 // favicon du serveur
 app.use(favicon("./images/nodejs.ico"));
+// info server
+app.use(morgan("dev"));
+// body parser
+app.use(express.json());
 // Contourner la sécurité CORS
 /*
 accéder à notre API depuis n'importe quelle origine ( '*' ) ;
@@ -24,6 +32,7 @@ ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin ,
 
 envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.).
 */
+//information supplémentaire sur le serveur
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -33,10 +42,6 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
   next();
 });
-//information supplémentaire sur le serveur
-app.use(morgan("dev"));
-
-app.use(express.json());
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", userRoutes);
