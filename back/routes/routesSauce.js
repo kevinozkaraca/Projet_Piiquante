@@ -5,6 +5,7 @@ const authentification = require("../divers/authentification");
 const controlesSauce = require("../controles/controlesSauce");
 
 router.get("/", authentification, controlesSauce.getAllSauce);
+router.get("", authentification, controlesSauce.getAllSauce);
 router.post("/", authentification, multer, controlesSauce.createSauce);
 router.get("/:id", authentification, controlesSauce.getOneSauce);
 router.put("/:id", authentification, multer, controlesSauce.modifySauce);

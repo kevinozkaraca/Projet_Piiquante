@@ -24,6 +24,7 @@ const getAllSauce = (req, res, next) => {
       res.status(400).json({
         error: error,
       });
+      console.log(error);
     });
 };
 
@@ -35,7 +36,8 @@ const createSauce = (req, res, next) => {
   delete sauceObject._id;
   const sauce = new Sauce({
     ...sauceObject,
-    imageUrl: "${req.protocol}://${req.get('host')}/images/${req.file.filename}",
+    //imageUrl: `../images/${req.file.filename}`,
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
   });
   sauce
     .save()
