@@ -1,15 +1,11 @@
 /*
 ----- INFORMATIONS -----
-
 front> npm start
 port 4200
-
 back> npm start
 port 3000
-
 app.js - base de données
 mongodb://localhost
-
 */
 const http = require("http");
 const app = require("./divers/app");
@@ -26,7 +22,7 @@ const normalizePort = (val) => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "3000" || "4200" || "27017");
 app.set("port", port);
 
 // recherche les différentes erreurs et les gère de manière appropriée. Elle est ensuite enregistrée dans le serveur ;

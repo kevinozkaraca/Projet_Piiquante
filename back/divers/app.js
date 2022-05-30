@@ -33,9 +33,7 @@ app.use(express.json());
 // Contourner la sécurité CORS
 /*
 accéder à notre API depuis n'importe quelle origine ( '*' ) ;
-
 ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.) ;
-
 envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.).
 */
 app.use((req, res, next) => {
